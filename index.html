@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraBuilder | Design Your Own Terrarium</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Scroll Animation Section -->
+    <div id="loading-overlay">
+        <div class="loader-content">
+            <div class="loader-logo">🌿 TerraBuilder</div>
+            <div class="loader-bar-container">
+                <div id="loader-bar"></div>
+            </div>
+            <p id="loader-text">Growing your world... 0%</p>
+        </div>
+    </div>
+
+    <div id="scroll-section">
+        <canvas id="animation-canvas"></canvas>
+        <div id="scroll-prompt">
+            <p>Scroll to explore</p>
+            <div class="arrow-bounce">↓</div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">🌿 TerraBuilder</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#customizer">Customizer</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <header id="home" class="hero">
+            <div class="container">
+                <h1 class="hero-title">Design Your Own Terrarium</h1>
+                <p class="hero-subtitle">Build it your way. We craft it with love.</p>
+                <a href="#customizer" class="btn btn-primary">Start Building →</a>
+            </div>
+        </header>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h3>Fully Customizable</h3>
+                        <p>Every element chosen by you for a unique creation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">👐</div>
+                        <h3>Handcrafted</h3>
+                        <p>Meticulously assembled by our expert botanists.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">♻️</div>
+                        <h3>Eco-Friendly</h3>
+                        <p>Sustainable materials and responsibly sourced plants.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🚚</div>
+                        <h3>Fast Delivery</h3>
+                        <p>Safe and swift shipping to your doorstep.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="customizer" class="customizer">
+            <div class="container">
+                <div class="customizer-box">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                        <div class="steps-labels">
+                            <span class="step-label active">Container</span>
+                            <span class="step-label">Plants</span>
+                            <span class="step-label">Layers</span>
+                            <span class="step-label">Decor</span>
+                            <span class="step-label">Review</span>
+                        </div>
+                    </div>
+
+                    <div class="steps-content">
+                        <!-- Step 1: Container -->
+                        <div class="step-pane active" id="step-1">
+                            <h2>Step 1: Choose Your Container</h2>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="container" value="Globe" data-price="299" checked>
+                                    <span class="card-content">
+                                        <span class="title">Globe</span>
+                                        <span class="price">₹299</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="container" value="Cylinder" data-price="349">
+                                    <span class="card-content">
+                                        <span class="title">Cylinder</span>
+                                        <span class="price">₹349</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="container" value="Jar" data-price="199">
+                                    <span class="card-content">
+                                        <span class="title">Jar</span>
+                                        <span class="price">₹199</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="container" value="Teardrop" data-price="399">
+                                    <span class="card-content">
+                                        <span class="title">Teardrop</span>
+                                        <span class="price">₹399</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="container" value="Bowl" data-price="249">
+                                    <span class="card-content">
+                                        <span class="title">Bowl</span>
+                                        <span class="price">₹249</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Plants -->
+                        <div class="step-pane" id="step-2">
+                            <h2>Step 2: Select Your Plants</h2>
+                            <p class="warning" id="comp-warning"></p>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="checkbox" name="plants" value="Succulent Mix" data-type="succulent" data-price="150">
+                                    <span class="card-content">
+                                        <span class="title">Succulent Mix</span>
+                                        <span class="price">₹150</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="plants" value="Fern Trio" data-type="tropical" data-price="180">
+                                    <span class="card-content">
+                                        <span class="title">Fern Trio</span>
+                                        <span class="price">₹180</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="plants" value="Mini Cactus" data-type="succulent" data-price="120">
+                                    <span class="card-content">
+                                        <span class="title">Mini Cactus</span>
+                                        <span class="price">₹120</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="plants" value="Fittonia" data-type="tropical" data-price="140">
+                                    <span class="card-content">
+                                        <span class="title">Fittonia</span>
+                                        <span class="price">₹140</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Layers -->
+                        <div class="step-pane" id="step-3">
+                            <h2>Step 3: Select Layers</h2>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="checkbox" name="layers" value="Organic Soil" data-price="30">
+                                    <span class="card-content">
+                                        <span class="title">Organic Soil</span>
+                                        <span class="price">₹30</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="layers" value="Activated Charcoal" data-price="40">
+                                    <span class="card-content">
+                                        <span class="title">Charcoal</span>
+                                        <span class="price">₹40</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="layers" value="River Pebbles" data-price="35">
+                                    <span class="card-content">
+                                        <span class="title">River Pebbles</span>
+                                        <span class="price">₹35</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="layers" value="Live Moss" data-price="50">
+                                    <span class="card-content">
+                                        <span class="title">Live Moss</span>
+                                        <span class="price">₹50</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Decorations -->
+                        <div class="step-pane" id="step-4">
+                            <h2>Step 4: Add Decorations</h2>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="checkbox" name="decorations" value="Mini Mushrooms" data-price="60">
+                                    <span class="card-content">
+                                        <span class="title">Mini Mushrooms</span>
+                                        <span class="price">₹60</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="decorations" value="LED Lights" data-price="120">
+                                    <span class="card-content">
+                                        <span class="title">LED Lights</span>
+                                        <span class="price">₹120</span>
+                                    </span>
+                                </label>
+                                <label class="option-card">
+                                    <input type="checkbox" name="decorations" value="Animal Figurines" data-price="80">
+                                    <span class="card-content">
+                                        <span class="title">Animal Figurines</span>
+                                        <span class="price">₹80</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="gift-box">
+                                <label for="gift-message">Gift Message (Optional)</label>
+                                <textarea id="gift-message" placeholder="Write a sweet note..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Review -->
+                        <div class="step-pane" id="step-5">
+                            <h2>Step 5: Review Your Order</h2>
+                            <div id="order-summary" class="order-summary">
+                                <!-- Populated by JS -->
+                            </div>
+                            <div class="total-price-box">
+                                <span>Total Amount:</span>
+                                <span id="final-price">₹299</span>
+                            </div>
+                            <button class="btn btn-primary btn-block" id="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="customizer-footer">
+                        <button class="btn btn-secondary" id="prev-btn" disabled>Back</button>
+                        <div class="live-price">Estimated: <span id="current-price">₹299</span></div>
+                        <button class="btn btn-primary" id="next-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">Small Worlds, Big Love</h2>
+                <p>At TerraBuilder, we believe in bringing a slice of nature into every home. Our terrariums are more than just plants in glass; they are living ecosystems designed by you and crafted by us.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-logo">🌿 TerraBuilder</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Shipping Terms</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                    <div class="socials">
+                        <a href="#">FB</a> | <a href="#">IG</a> | <a href="#">TW</a>
+                    </div>
+                </div>
+                <p class="copyright">© 2026 TerraBuilder. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
